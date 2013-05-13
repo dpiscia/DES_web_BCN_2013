@@ -3,33 +3,41 @@ from pyramid.view import view_config
 
 from sqlalchemy.exc import DBAPIError
 
-from .models import (
-    DBSession,
-    MyModel,
-    )
 
 
-@view_config(route_name='home', renderer='templates/mytemplate.pt')
-def my_view(request):
-    try:
-        one = DBSession.query(MyModel).filter(MyModel.name == 'one').first()
-    except DBAPIError:
-        return Response(conn_err_msg, content_type='text/plain', status_int=500)
-    return {'one': one, 'project': 'DES_BCN'}
 
-conn_err_msg = """\
-Pyramid is having a problem using your SQL database.  The problem
-might be caused by one of the following things:
+@view_config(route_name='home', renderer='home.mako')
+def home_view(request):
 
-1.  You may need to run the "initialize_DES_BCN_db" script
-    to initialize your database tables.  Check your virtual 
-    environment's "bin" directory for this script and try to run it.
+    return {'info' : None}
+    
+@view_config(route_name='program', renderer='program.mako')
+def program_view(request):
 
-2.  Your database server may not be running.  Check that the
-    database server referred to by the "sqlalchemy.url" setting in
-    your "development.ini" file is running.
+    return {'info' : None}
+    
+@view_config(route_name='participants', renderer='participants.mako')
+def participants_view(request):
 
-After you fix the problem, please restart the Pyramid application to
-try it again.
-"""
+    return {'info' : None}
+    
+@view_config(route_name='venue_accommodation', renderer='venue_accommodation.mako')
+def venue_accommodation_view(request):
 
+    return {'info' : None}
+
+
+@view_config(route_name='travel', renderer='travel.mako')
+def travel_view(request):
+
+    return {'info' : None}
+
+@view_config(route_name='registration', renderer='registration.mako')
+def registration_view(request):
+
+    return {'registration' : None}
+    
+@view_config(route_name='contact', renderer='contact.mako')
+def contact_view(request):
+
+    return {'contact' : None}

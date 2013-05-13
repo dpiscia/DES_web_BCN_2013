@@ -38,7 +38,5 @@ setup(name='DES_BCN',
       entry_points="""\
       [paste.app_factory]
       main = des_bcn:main
-      [console_scripts]
-      initialize_DES_BCN_db = des_bcn.scripts.initializedb:main
       """,
       )
