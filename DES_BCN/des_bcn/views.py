@@ -1,7 +1,11 @@
 from pyramid.response import Response
 from pyramid.view import view_config
+import model
 
-from sqlalchemy.exc import DBAPIError
+from colanderalchemy import SQLAlchemySchemaNode
+from deform import Form
+
+
 
 
 
@@ -32,12 +36,18 @@ def travel_view(request):
 
     return {'info' : None}
 
-@view_config(route_name='registration', renderer='registration.mako')
+@view_config(route_name='registration', renderer='reg_deform.mako')
 def registration_view(request):
+       schema = SQLAlchemySchemaNode(model.User) 
+       form = Form(schema, buttons=('submit',))
+       #return {'registration' : None}
+       return {'form':form.render()}
 
-    return {'registration' : None}
+ 
     
 @view_config(route_name='contact', renderer='contact.mako')
 def contact_view(request):
 
     return {'contact' : None}
+    
+
