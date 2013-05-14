@@ -24,7 +24,7 @@ def program_view(request):
 def participants_view(request):
 
     participants = model.session.query(model.User).all()
-
+    model.session.commit()
     return {'participants':participants }
     
 @view_config(route_name='venue_accommodation', renderer='venue_accommodation.mako')
