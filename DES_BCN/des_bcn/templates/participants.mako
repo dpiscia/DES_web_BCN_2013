@@ -4,8 +4,8 @@
 A list of participants from the Participants table (db)
 </h3>
 
-<script type="text/javascript" charset="utf-8" src="/static/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="/static/js/DT_bootstrap.js"    "></script>
+<script type="text/javascript" charset="utf-8" src="/static/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/static/DT_bootstrap.js"    "></script>
  <script type="text/javascript">
 /* Default class modification */
 

@@ -2,7 +2,7 @@
 <%block name="main_container">
 
 <link rel="stylesheet" href="/deform_static/css/form.css"      type="text/css" />
-<script src="/deform_static/deform.js"></script>           
+<script src="/deform_static/js/deform.js"></script>           
 % if form:
   ${form|n}
 
