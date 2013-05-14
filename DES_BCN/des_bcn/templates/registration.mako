@@ -3,4 +3,7 @@
       <h3>
 Registration will open in June.
 </h3>
+
+
+
 </%block>

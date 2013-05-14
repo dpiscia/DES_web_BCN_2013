@@ -14,6 +14,8 @@ requires = [
     'pyramid_debugtoolbar',
     'zope.sqlalchemy',
     'waitress',
+    'colander',
+    'deform',
     ]
 
 setup(name='DES_BCN',

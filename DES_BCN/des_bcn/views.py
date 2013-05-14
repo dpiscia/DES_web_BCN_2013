@@ -3,7 +3,7 @@ from pyramid.view import view_config
 import model
 
 from colanderalchemy import SQLAlchemySchemaNode
-from deform import Form
+from deform import Form, ValidationFailure
 
 
 
@@ -23,7 +23,9 @@ def program_view(request):
 @view_config(route_name='participants', renderer='participants.mako')
 def participants_view(request):
 
-    return {'info' : None}
+    participants = model.session.query(model.User).all()
+
+    return {'participants':participants }
     
 @view_config(route_name='venue_accommodation', renderer='venue_accommodation.mako')
 def venue_accommodation_view(request):
@@ -38,10 +40,29 @@ def travel_view(request):
 
 @view_config(route_name='registration', renderer='reg_deform.mako')
 def registration_view(request):
+    
        schema = SQLAlchemySchemaNode(model.User) 
-       form = Form(schema, buttons=('submit',))
-       #return {'registration' : None}
-       return {'form':form.render()}
+       form = Form(schema, buttons=('submit',) , use_ajax=True  )
+       
+       
+       if 'submit' in request.POST: # detect that the submit button was clicked
+            
+            controls = request.POST.items() # get the form controls
+            
+            try:
+                appstruct = form.validate(controls)  # call validate
+                user = model.User(email = appstruct['email'], name = appstruct['name'], surname = appstruct['surname'])
+                model.session.add(user)
+                model.session.commit()
+            except ValidationFailure, e: # catch the exception:
+#TODO update db with registry            
+                return {'form':e.render()  ,'values': False} # re-render the form with an exception
+            except Exception as e:
+                
+                return {'form': 'DB error' ,'values': False}
+    # the form submission succeeded, we have the data
+            return {'form':form.render() , "values": appstruct }
+       return {'form':form.render() , "values": None }
 
  
     
