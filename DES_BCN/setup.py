@@ -16,7 +16,8 @@ requires = [
     'waitress',
     'colander',
     'deform',
-    ]
+    'colanderalchemy',
+	]
 
 setup(name='DES_BCN',
       version='0.0',
