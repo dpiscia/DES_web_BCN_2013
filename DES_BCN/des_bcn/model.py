@@ -4,6 +4,8 @@ from sqlalchemy.orm import  sessionmaker, scoped_session
 from sqlalchemy import PrimaryKeyConstraint, UniqueConstraint
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import MetaData, Column
+import colander
+import deform
 
 Base = declarative_base()
 metadata      = Base.metadata
@@ -37,7 +39,11 @@ def recreate():
     metadata.drop_all()
     metadata.create_all()
 
-        
+widget = deform.widget.CheckedInputWidget(
+            subject='Email',
+            confirm_subject='Confirm Email',
+            size=40)
+            
 class User(Base):
     __tablename__ = 'user'
     __table_args__ = (
@@ -48,7 +54,9 @@ class User(Base):
     )
     # Columns
     id        = Column(Integer,     nullable=False , info={'colanderalchemy': {'exclude': True}} )
-    email     = Column(String(32),  nullable=False,  index=True)
+    email     = Column(String(32),  nullable=False,  index=True , info={'colanderalchemy': {'validator' : colander.Email(),
+                                                                                            'description' :'Type your email address and confirm it',
+                                                                                             'widget' : widget  } } )
     name      = Column(String(64),  nullable=True)
     surname   = Column(String(64),  nullable=False  )
 
