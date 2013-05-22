@@ -1,8 +1,6 @@
 <%inherit file="base.mako"/>
 <%block name="main_container">
-      <h3>
-A list of participants from the Participants table (db)
-</h3>
+  
 
 <script type="text/javascript" charset="utf-8" src="/static/jquery.dataTables.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/static/DT_bootstrap.js"    "></script>

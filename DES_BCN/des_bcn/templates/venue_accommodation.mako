@@ -3,9 +3,9 @@
 
 
  
-<p class="style1">The meeting will be held at the <a href="http://www.caproig.com/en/edenroc" target="_blank">Eden Roc hotel</a>  in Sant Feliu de Guixols (Girona)</p>
+<p align="center" class="style1">The meeting will be held at the <a href="http://www.caproig.com/en/edenroc" target="_blank">Eden Roc hotel</a>  in Sant Feliu de Guixols (Girona)</p>
 <p align="center" class="style1"><img style="border:10px solid white" src="static/edenroc.jpg" width="600" height="400" /></p>
-<p class="style1">Please<strong> DO NOT</strong> book your room in your own. <span class="style2">Rooms are booked and assigned throughout the meeting registration</span>. Accommodation is paid directly at the Hotel.</p>
+<p align="center" class="style1">Please<strong> DO NOT</strong> book your room in your own. <span class="style2">Rooms are booked and assigned throughout the meeting registration</span>. Accommodation is paid directly at the Hotel.</p>
 <p align="center" class="style1">All participants are expected to stay in the Eden Roc Hotel.  </p>
 <p class="style1">&nbsp;</p>
 <p align="center" class="style1">

@@ -116,7 +116,7 @@
 	  allowEventCreation: false,
       height: function($calendar) {
         
-        return $(window).height() - $('h1').outerHeight(true);
+        return 650;
       },
 	  draggable : function(calEvent, $event) {
          return calEvent.readOnly != true;
@@ -180,17 +180,20 @@
 </script>
 </head>
 <div id="body" style="bgcolor=#333333; ">
- <p class="style1">WEB CALENDAR</p>
-<p class="style1">Find detailed program  and book <span class="style12">Free Meetings</span> rooms in redmine wiki: <em>Not ready yet</em></p>
-<p class="style1">Upload your talks to docdb events:  <em>Not ready yet</em></p>
 
-  <h1>DES Collaboration Meeting Program</h1>
+
+  
 
   <p class="description">
     General program view.
 </p>
 
-  <div id='calendar' style="height:600px;"></div>
+  <div id='calendar' ></div>
+
 </div>
 *For participants staying in Eden Roc Hotel
+
+ <p class="style1">WEB CALENDAR</p>
+<p class="style1">Find detailed program  and book <span class="style12">Free Meetings</span> rooms in redmine wiki: <em>Not ready yet</em></p>
+<p class="style1">Upload your talks to docdb events:  <em>Not ready yet</em></p>
 </%block>
