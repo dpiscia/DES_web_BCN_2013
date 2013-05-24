@@ -9,7 +9,7 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="/static/bootstrap_DES_2.css" rel="stylesheet">
+    <link href="/static/bootstrap_DES_2.min.css" rel="stylesheet">
     
     <style>
       body {
@@ -71,13 +71,10 @@ html,body
 	border-width: 11;
 	}
 .style2 {
-	color: #0066FF;
+	color: #FF9900;
 	font-weight: bold;
 }
-a:link {
-	color:#FF9900;
-	font-weight: bold;
-}
+
 .style3 {font-family: Arial, Helvetica, sans-serif}
 .style4 {color: #0066FF; font-weight: bold; font-family: Arial, Helvetica, sans-serif; }
 .style8 {font-family: Arial, Helvetica, sans-serif; color: #333333; border-color: #FFFFFF; border-width: 11; font-weight: bold; }
@@ -119,7 +116,7 @@ a:link {
                 <span class="icon-bar"></span>
               </button>
           <a class="brand" > <img src="static/DES_logo_black_transp_small.png"></a>  
-          <a class="brand" >Dark Energy Survey International Collaboration meeting</a>
+          <a class="brand" >Dark Energy Survey (DES) International Collaboration Operations Meeting</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li ${'class= active' if (tab == 'home') else ''} ><a href="${request.route_url('home')}">  Home</a></li>
