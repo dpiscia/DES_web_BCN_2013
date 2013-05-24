@@ -89,7 +89,7 @@ var eventData = {
       {'id':6,  'start': new Date(2013, 9, 3, 12, 30), 'end': new Date(2013, 9, 3, 14, 30),'title':'Lunch', 'classname': "LC"},
       {'id':7,  'start': new Date(2013, 9, 3, 14, 30), 'end': new Date(2013, 9, 3, 16, 00),'title':'Parallel', 'classname': "parallel"},
       {'id':8,  'start': new Date(2013, 9, 3, 16, 00), 'end': new Date(2013, 9, 3, 16, 30),'title':'Coffee break', 'classname': "LC"},
-      {'id':9,  'start': new Date(2013, 9, 3, 16, 30), 'end': new Date(2013, 9, 3, 18, 00),'title':'Parallel (3 roooms only)', 'classname': "parallel"},
+      {'id':9,  'start': new Date(2013, 9, 3, 16, 30), 'end': new Date(2013, 9, 3, 18, 00),'title':'Parallel (3 rooms only)', 'classname': "parallel"},
       {'id':10, 'start': new Date(2013, 9, 3, 18, 00), 'end': new Date(2013, 9, 3, 19, 00),'title':'Extra Sessions', 'classname': "FM"},
       {'id':10, 'start': new Date(2013, 9, 3, 19, 30), 'end': new Date(2013, 9, 3, 21, 30),'title':'Banquet', 'classname': "social"},
 	  {'id':2,  'start': new Date(2013, 9, 4, 7, 30),  'end': new Date(2013, 9, 4, 9, 00),'title':'Breakfast', 'classname': "LC"},

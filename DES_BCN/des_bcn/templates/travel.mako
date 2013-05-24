@@ -47,7 +47,7 @@
     <td class="style9">Airport T1 (Barcelona)</td>
     <td class="style9">Barcelona Downtown <br> (exact location TBD)</td>
     <td class="style9">Sunday 29 at 11.00 am (GMT+2)</td>
-    <td class="style9">1:30 to the Airport T1 </td>
+    <td class="style9">2h (1:30 to Airport T1) </td>
   </tr>
 </table>
 <br>
@@ -66,7 +66,8 @@
   <iframe style="border:10px solid white" width="640" height="480" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.es/maps?f=d&amp;source=s_d&amp;saddr=Aeropuerto+Barcelona-Prat+T1,+Barcelona&amp;daddr=Eden+Roc+Hotel,+Eden+Roc+Hotel,+Punta+de+Port+Salvi,+s%2Fn,+17220+Sant+Feliu+de+Gu%C3%ADxols,+Gerona,+Girona&amp;hl=en&amp;geocode=FVYBdgIdgKAfACGNOyw5AR2fsSkJBA5ocZ6kEjGNOyw5AR2fsQ%3BFbRlfQId-DwuACmJ_ypWkAa7EjEWczHIfkrNLw&amp;aq=t&amp;sll=41.538394,2.551575&amp;sspn=0.977546,2.070923&amp;mra=pd&amp;ie=UTF8&amp;t=m&amp;ll=41.611335,2.529602&amp;spn=0.985691,1.757813&amp;z=9&amp;output=embed"></iframe>
 </p>
 <p class="style1">&nbsp;</p>
-<p class="style2">D) Taxi (expensive option) </p>
+<p class="style1"><span class="style2">D) Taxi</span> (expensive option) </p>
+
 <p class="style1">You might be able to take a taxi from the airport but the price can be expensive. Agree on the price before leaving.</p>
 <p class="style1">&nbsp;</p>
 <p class="style1">Another option for travellers flying with low-cost companies from Europe is <strong>Girona-Costa Brava Airport</strong>. It is only 30 km away from Sant Feliu de Guixols but there is no public transportation between this airport and Sant Feliu de Guixols. Options would be Renting a Car  (~40 min drive) or taking a Taxi.</p>

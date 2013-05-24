@@ -47,7 +47,7 @@ html,body
     overflow:auto;
     padding-top: 150px; /* 60px to make the container go all the way to the bottom of the topbar */
     
-    padding-bottom:165px; /* this needs to be bigger than footer height*/
+    padding-bottom:70px; /* this needs to be bigger than footer height*/
 }
  
 .footer 
