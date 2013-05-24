@@ -152,6 +152,7 @@ html,body
              
             
               <a class="brand"  > <img src="static/logo_ieec_40.png" ></a>
+              <a class="brand"  style="padding-left: 120px;"> <img src="static/csic_ice_logo_transp.png" ></a>
               <a class="brand pull-right" > <img src="static/logo_ifae_40.png"></a>
              
           
