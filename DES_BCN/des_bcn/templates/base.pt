@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="/static/bootstrap_DES_2.min.css" rel="stylesheet">
+
+     <link rel="stylesheet" href="http://deformdemo.xo7.de/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://deformdemo.xo7.de/static-deform_bootstrap/deform_bootstrap.css" type="text/css" media="screen" charset="utf-8" />
+    <link rel="stylesheet" href="http://deformdemo.xo7.de/static-deform_bootstrap/jquery_chosen/chosen.css" type="text/css" media="screen" charset="utf-8" />
+
+    <!-- Widget requirements -->
+    <script src="http://deformdemo.xo7.de/static-deform_bootstrap/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="http://deformdemo.xo7.de/static/scripts/jquery.form.js" type="text/javascript"></script>
+    <script src="http://deformdemo.xo7.de/static-deform_bootstrap/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
+    <script src="http://deformdemo.xo7.de/static-deform_bootstrap/jquery.maskedinput-1.3.js" type="text/javascript"></script>
+    <script src="http://deformdemo.xo7.de/static-deform_bootstrap/jquery-ui-timepicker-addon-0.9.9.js" type="text/javascript"></script>
+    <script src="http://deformdemo.xo7.de/static/tinymce/jscripts/tiny_mce/tiny_mce.js" type="text/javascript"></script>
+    <script src="http://deformdemo.xo7.de/static/scripts/deform.js" type="text/javascript"></script>
+    <script src="http://deformdemo.xo7.de/static-deform_bootstrap/deform_bootstrap.js" type="text/javascript"></script>
+    <script src="http://deformdemo.xo7.de/static-deform_bootstrap/bootstrap.min.js" type="text/javascript"></script>
+    <script src="http://deformdemo.xo7.de/static-deform_bootstrap/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="http://deformdemo.xo7.de/static-deform_bootstrap/bootstrap-typeahead.js" type="text/javascript"></script>
+    <script src="http://deformdemo.xo7.de/static-deform_bootstrap/jquery_chosen/chosen.jquery.min.js" type="text/javascript"></script>
+
+
+
+
+    <style>
+      body {
+        
+
+
+
+      }
+    .navbar-inner {
+  background: #8D8D8D; 
+   
+ 
+}
+
+/* styles for layout */
+html,body
+{
+    height:100%;
+
+}
+ 
+#wrap
+{
+  min-height: 100%; 
+  height : auto !important;
+ height: 100%;
+  
+}
+ 
+#main
+{
+    overflow:auto;
+    padding-top: 150px; /* 60px to make the container go all the way to the bottom of the topbar */
+    
+    padding-bottom:70px; /* this needs to be bigger than footer height*/
+}
+ 
+.footer 
+{
+    position: relative;
+    margin-top: -60px; /* negative value of footer height */
+    padding-top: 10px;
+    clear:both;
+    height: 60px;
+    color:#8D8D8D;
+} 
+
+
+.DES {font-size : 18px;}
+
+<!--
+.style1 {
+	font-family: Arial, Helvetica, sans-serif;
+	color:#FFF;
+	border-color: #FFFFFF;
+	border-width: 11;
+	}
+.style2 {
+	color: #FF9900;
+	font-weight: bold;
+}
+
+.style3 {font-family: Arial, Helvetica, sans-serif}
+.style4 {color: #0066FF; font-weight: bold; font-family: Arial, Helvetica, sans-serif; }
+.style8 {font-family: Arial, Helvetica, sans-serif; color: #333333; border-color: #FFFFFF; border-width: 11; font-weight: bold; }
+.style9 {font-family: Arial, Helvetica, sans-serif; color: #FFF; border-color: #FFFFFF; border-width: 11; font-size: small; }
+.style10 {font-size: small}
+.style11 {
+	color: #FFCC00;
+	font-weight: bold;
+	font-size: large;
+}
+.style12 {
+	color: #66CC33;
+	font-weight: bold;
+}
+.style13 {font-family: Arial, Helvetica, sans-serif; color: #FFF; border-color: #FFFFFF; border-width: 11; font-size: x-large; }
+.style14 {font-size: medium}
+-->
+
+    </style>
+  </head>
+
+  <body>
+    <div  class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container ">
+             <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+          <a class="brand" > <img src="static/DES_logo_black_transp_small.png"></a>  
+          <a class="brand" >Dark Energy Survey (DES) International Collaboration Operations Meeting</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li  > <a href="${request.route_url('home')}">  Home</a></li>
+              <li ><a href="${request.route_url('program')}">Program</a></li>
+              <li ><a href="${request.route_url('participants')}">Participants</a></li>
+              <li ><a href="${request.route_url('venue_accommodation')}">Venue & Accommodation</a></li>
+              <li ><a href="${request.route_url('travel')}">Travel</a></li>
+              <li ><a href="${request.route_url('registration')}">Registration</a></li>
+
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+  
+<div id="wrap">
+<div id="main" class="container clear-top">
+    <div class="row"> 
+        <div class="span12">
+    <div metal:define-slot="content"></div>
+       </div>
+    </div>
+</div>
+</div>
+
+<footer class="footer" style="background-color:#c2c2c2;">
+    <div class="container" style="margin:0 auto;" >
+        <a class="brand"  > <img src="static/logo_ieec_40.png" ></a>
+        <a class="brand"  style="padding-left: 120px;"> <img src="static/csic_ice_logo_transp.png" ></a>
+        <a class="brand pull-right" > <img src="static/logo_ifae_40.png"></a>
+    </div>
+</footer>
+
+  </body>
+</html>

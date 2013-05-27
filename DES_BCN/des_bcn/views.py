@@ -7,11 +7,12 @@ import colander
 import deform
 from colanderalchemy import SQLAlchemySchemaNode
 from deform import Form, ValidationFailure
-
-
-
-
-
+from pyramid.renderers import render_to_response
+from pyramid.renderers import get_renderer
+from deform import ZPTRendererFactory
+from pkg_resources import resource_filename
+from colander import Range
+import datetime
 
 @view_config(route_name='home', renderer='home.mako')
 def home_view(request):
@@ -87,4 +88,121 @@ def contact_view(request):
 
     return {'contact' : None, 'tab' : 'contact'}
 
+@view_config(route_name='prova', renderer='prova.mako')
+def prova_view(request):
+        
+        deform_templates = resource_filename('deform', 'templates')
+#TODO search_path independent way of setting        
+        search_path = ('/Users/dpiscia/python_projects/bootstrap_dir/demo_bootstrap/deform_bootstrap/deform_bootstrap/templates', deform_templates)
 
+        renderer = ZPTRendererFactory(search_path)
+        widget_email = deform.widget.CheckedInputWidget(
+            subject='Email',
+            confirm_subject='Confirm Email',
+            size=40)
+        arrival_choices = ((0, 'On my own'), (1, 'BUS 1'),
+                   (2, 'BUS 2'))
+        bus_stop =       ((0, 'From Airport'), (1, 'From City'))     
+        class Mapping(colander.Schema):
+            name = colander.SchemaNode(
+                colander.String(),
+                description='Content Name')
+            Surname = colander.SchemaNode(
+                colander.String(),
+                description='Content Surname')   
+            email = colander.SchemaNode(
+                colander.String(),
+                title='Email Address',
+                description='Type your email address and confirm it',
+                validator=colander.Email(),
+                widget=widget_email)
+            Institution = colander.SchemaNode(
+                colander.String(),
+                description='Content Insitution name')                
+                
+            Expected_Arrival_date = colander.SchemaNode(
+                colander.DateTime(),
+                
+                description='Content date')
+            Expected_arrival_time = colander.SchemaNode(
+                colander.Time(),
+                description='Content arrival time')     
+            Arrival_BUS_option = colander.SchemaNode(
+                colander.String(),
+                validator=colander.OneOf([x[0] for x in arrival_choices]),
+                widget=deform.widget.RadioChoiceWidget(values=arrival_choices , inline=True),
+                title='Choose your option',
+                description='')  
+            BUS_option_1_1 = colander.SchemaNode(
+                colander.Boolean(),
+                widget = deform.widget.HiddenWidget(),
+                default=True,
+                )
+            BUS_option_1_1 = colander.SchemaNode(
+                colander.String(),
+                validator=colander.OneOf([x[0] for x in bus_stop]),
+                widget=deform.widget.RadioChoiceWidget(values=bus_stop , inline=True),
+                title='Choose your option',
+                description='') 
+            Vegetarian = colander.SchemaNode(
+                colander.Boolean(),
+                description='',
+                widget=deform.widget.CheckboxWidget(),
+                title='Vegetarian meals')
+            Student = colander.SchemaNode(
+                colander.Boolean(),
+                description='',
+                widget=deform.widget.CheckboxWidget(),
+                title='Are you a Student')
+                               
+        class Schema(colander.Schema):
+            number = colander.SchemaNode(
+                colander.Integer())
+            mapping = Mapping()
+
+        schema = Schema()
+        
+        form = deform.Form(schema, buttons=('submit',) , renderer=renderer )
+        when = datetime.time(14, 35)
+        return render_to_response('templates/prova.pt',  render_form(request, form ,appstruct={'date':when} ) , request )
+       
+def render_form(request, form, appstruct=colander.null, submitted='submit',
+                    success=None, readonly=False):
+
+        captured = None
+
+        if submitted in request.POST:
+            # the request represents a form submission
+            try:
+                # try to validate the submitted values
+                controls = request.POST.items()
+                captured = form.validate(controls)
+                if success:
+                    response = success()
+                    if response is not None:
+                        return response
+                html = form.render(captured)
+            except deform.ValidationFailure as e:
+                # the submitted values could not be validated
+                html = e.render()
+
+        else:
+            # the request requires a simple form rendering
+            html = form.render(appstruct, readonly=readonly)
+
+        if request.is_xhr:
+            return Response(html)
+
+
+        reqts = form.get_widget_resources()
+
+        # values passed to template for rendering
+        return {
+            'form':html,
+            'captured':repr(captured),
+            'demos':[],
+            'showmenu':False,
+            'title': "prova",
+            'css_links':reqts['css'],
+            'js_links':reqts['js'],
+            }

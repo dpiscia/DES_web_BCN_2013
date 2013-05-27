@@ -1,0 +1,51 @@
+<html metal:use-macro="load: base.pt">
+
+
+<div metal:fill-slot="content">
+<script type="text/javascript">
+
+$(document).ready(function(){
+  
+/*    $("#item-deformField10").hide();
+    $("#item-deformField9.control-group").on( "click", function() {
+    if ($("input:checked").val() == '1' ||  $("input:checked").val() == '2' )
+         {  $("#item-deformField10").show();   }
+    else { $("#item-deformField10").hide(); } 
+
+
+*/
+  
+
+    $("#item-deformField10.control-group input:radio").attr('disabled',true);
+    $("#item-deformField10").css("color", "#eeeeee");
+           $("#item-deformField9.control-group").on( "click", function() {
+    if ($("input:checked").val() == '1' ||  $("input:checked").val() == '2' )
+         {   $("#item-deformField10.control-group input:radio").attr('disabled',false);
+             $("#item-deformField10").css("color", "#141414"); }
+    else { $("#item-deformField10.control-group input:radio").attr('disabled',true);
+             $("#item-deformField10").css("color", "#eeeeee");  }
+    
+   });
+
+ 
+});
+</script>
+<style>
+.slidingDiv {
+    height:20px;
+    background-color: #99CCFF;
+    padding:20px;
+    margin-top:10px;
+    
+}
+ 
+.show_hide {
+    display:none;
+}
+</style>
+
+    <a href="#" class="show_hide">Show/hide</a>
+    <div id="form" tal:content="structure form"/>
+</div>
+
+</html>
