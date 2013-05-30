@@ -13,7 +13,7 @@ def main(global_config, **settings):
     config = Configurator(settings=settings)
     config.add_static_view('static', 'static')
     config.add_static_view('deform_static', 'deform:static')
-    
+    config.include('pyramid_mailer')
     config.add_route('program', '/program')
     config.add_route('home', '/')
     config.add_route('participants', '/participants')
@@ -21,6 +21,7 @@ def main(global_config, **settings):
     config.add_route('travel', '/travel')
     config.add_route('registration', '/registration')
     config.add_route('contact', '/contact')
+    config.add_route('prova', '/prova')
     
 
     config.scan()

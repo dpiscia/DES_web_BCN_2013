@@ -2,34 +2,42 @@
 
 
 <div metal:fill-slot="content">
+<script src='static/validation.js'></script>
+
+
+
+
+
+
 <script type="text/javascript">
 
+//functions used below are defined in validation.js coffeescript powered
 $(document).ready(function(){
-  
-/*    $("#item-deformField10").hide();
-    $("#item-deformField9.control-group").on( "click", function() {
-    if ($("input:checked").val() == '1' ||  $("input:checked").val() == '2' )
-         {  $("#item-deformField10").show();   }
-    else { $("#item-deformField10").hide(); } 
+     $("#deform").live('change', function() 
+        {        appear_cf("17","16", ["1"]);
+                 appear_cf("18","16", ["2"]);
+                 appear_cf("10","9", ["0"]);
+                 appear_cf("11","10", ["1"]);
+                 appear_cf("12","11", ["1"]);
+                 appear_cf("23","22", ["1"]);
+             
 
-
-*/
-  
-
-    $("#item-deformField10.control-group input:radio").attr('disabled',true);
-    $("#item-deformField10").css("color", "#eeeeee");
-           $("#item-deformField9.control-group").on( "click", function() {
-    if ($("input:checked").val() == '1' ||  $("input:checked").val() == '2' )
-         {   $("#item-deformField10.control-group input:radio").attr('disabled',false);
-             $("#item-deformField10").css("color", "#141414"); }
-    else { $("#item-deformField10.control-group input:radio").attr('disabled',true);
-             $("#item-deformField10").css("color", "#eeeeee");  }
-    
-   });
+        });    
+        
+                 appear_cf("17","16", ["1"]);
+                 appear_cf("18","16", ["2"]);
+                 appear_cf("10","9", ["0"]);
+                 appear_cf("11","10", ["1"]);
+                 appear_cf("12","11", ["1"]);
+                 appear_cf("23","22", ["1"]);
 
  
 });
+
 </script>
+
+
+
 <style>
 .slidingDiv {
     height:20px;
@@ -47,5 +55,6 @@ $(document).ready(function(){
     <a href="#" class="show_hide">Show/hide</a>
     <div id="form" tal:content="structure form"/>
 </div>
+
 
 </html>

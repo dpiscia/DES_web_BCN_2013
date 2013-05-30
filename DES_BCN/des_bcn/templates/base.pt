@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link href="/static/bootstrap_DES_2.min.css" rel="stylesheet">
+    <link href="static/bootstrap_DES_2.min.css" rel="stylesheet">
 
      <link rel="stylesheet" href="http://deformdemo.xo7.de/pygments.css" type="text/css" />
     <link rel="stylesheet" href="http://deformdemo.xo7.de/static-deform_bootstrap/deform_bootstrap.css" type="text/css" media="screen" charset="utf-8" />

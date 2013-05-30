@@ -19,10 +19,11 @@ requires = [
     'colander',
     'deform',
     'colanderalchemy',
+    'pyramid_mailer',
 	]
 
 setup(name='DES_BCN',
-      version='0.0',
+      version='0.1',
       description='DES_BCN',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[

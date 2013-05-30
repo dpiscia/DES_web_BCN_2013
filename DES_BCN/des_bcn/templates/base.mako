@@ -9,7 +9,7 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="/static/bootstrap_DES_2.min.css" rel="stylesheet">
+    <link href="static/bootstrap_DES_2.min.css" rel="stylesheet">
     
     <style>
       body {

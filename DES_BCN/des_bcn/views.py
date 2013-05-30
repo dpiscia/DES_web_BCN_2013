@@ -13,6 +13,8 @@ from deform import ZPTRendererFactory
 from pkg_resources import resource_filename
 from colander import Range
 import datetime
+from pyramid_mailer import get_mailer
+import sqlalchemy
 
 @view_config(route_name='home', renderer='home.mako')
 def home_view(request):
@@ -92,58 +94,73 @@ def contact_view(request):
 def prova_view(request):
         
         deform_templates = resource_filename('deform', 'templates')
-#TODO search_path independent way of setting        
-        search_path = ('/Users/dpiscia/python_projects/bootstrap_dir/demo_bootstrap/deform_bootstrap/deform_bootstrap/templates', deform_templates)
-
+#TODO search_path independent way of setting 
+        bootstrap_templates = resource_filename('des_bcn','bootstrap_deform_templates')
+        #search_path = ('/Users/dpiscia/python_projects/bootstrap_dir/demo_bootstrap/deform_bootstrap/deform_bootstrap/templates', deform_templates)
+        search_path = (bootstrap_templates,deform_templates)
         renderer = ZPTRendererFactory(search_path)
         widget_email = deform.widget.CheckedInputWidget(
             subject='Email',
             confirm_subject='Confirm Email',
             size=40)
-        arrival_choices = ((0, 'On my own'), (1, 'BUS 1'),
-                   (2, 'BUS 2'))
-        bus_stop =       ((0, 'From Airport'), (1, 'From City'))     
-        class Mapping(colander.Schema):
+        arrival_choices = (("0", 'On my own'), ("1", 'BUS Morning'),
+                   ("2", 'BUS Afternoon'))
+        departure_choices = (("0", 'On my own'), ("1", 'BUS Afternoon'))                   
+        bus_stop_morning =       (("0", 'From Airport'), ("1", 'From City')) 
+        bus_stop_afternoon =       (("0", 'From Airport'), ("1", 'From City'))
+        bus_stop_departure =       (("0", 'To Airport'), ("1", 'To City'))
+        hotel_choices =       (("0", 'Eden'), ("1", 'On my own'))
+        occ_choices =       (("0", 'Single'), ("1", 'Double'))
+        double_choices =       (("0", 'Accompanying person'), ("1", 'other DES'))
+        gender_choices =       (("0", 'Male'), ("1", 'Female'))
+
+                
+        class Personal_information(colander.Schema):        
             name = colander.SchemaNode(
                 colander.String(),
-                description='Content Name')
+                description='')
             Surname = colander.SchemaNode(
                 colander.String(),
-                description='Content Surname')   
+                description='')   
             email = colander.SchemaNode(
                 colander.String(),
                 title='Email Address',
-                description='Type your email address and confirm it',
+                description='',
                 validator=colander.Email(),
                 widget=widget_email)
             Institution = colander.SchemaNode(
                 colander.String(),
-                description='Content Insitution name')                
-                
+                description='')                
+        class Arrival_information(colander.Schema):         
             Expected_Arrival_date = colander.SchemaNode(
-                colander.DateTime(),
-                
-                description='Content date')
+                colander.Date(),
+                 #widget = deform.widget.DatePartsWidget(),
+                description='')
             Expected_arrival_time = colander.SchemaNode(
                 colander.Time(),
-                description='Content arrival time')     
+                description='')     
             Arrival_BUS_option = colander.SchemaNode(
                 colander.String(),
                 validator=colander.OneOf([x[0] for x in arrival_choices]),
                 widget=deform.widget.RadioChoiceWidget(values=arrival_choices , inline=True),
                 title='Choose your option',
                 description='')  
-            BUS_option_1_1 = colander.SchemaNode(
-                colander.Boolean(),
-                widget = deform.widget.HiddenWidget(),
-                default=True,
-                )
-            BUS_option_1_1 = colander.SchemaNode(
+         
+            BUS_option_arrival_morning = colander.SchemaNode(
                 colander.String(),
-                validator=colander.OneOf([x[0] for x in bus_stop]),
-                widget=deform.widget.RadioChoiceWidget(values=bus_stop , inline=True),
+                missing=unicode(''),
+                widget=deform.widget.RadioChoiceWidget(values=bus_stop_morning , inline=True),
                 title='Choose your option',
-                description='') 
+                description=''
+                ) 
+            BUS_option_arrival_afternoon = colander.SchemaNode(
+                colander.String(),
+                missing=unicode(''),
+                widget=deform.widget.RadioChoiceWidget(values=bus_stop_afternoon , inline=True),
+                title='Choose your option',
+                description=''
+                )                 
+        class Hotel_information(colander.Schema):                  
             Vegetarian = colander.SchemaNode(
                 colander.Boolean(),
                 description='',
@@ -154,33 +171,157 @@ def prova_view(request):
                 description='',
                 widget=deform.widget.CheckboxWidget(),
                 title='Are you a Student')
-                               
+            Hotel = colander.SchemaNode(
+                colander.String(),
+                validator=colander.OneOf([x[0] for x in hotel_choices]),
+                widget=deform.widget.RadioChoiceWidget(values=hotel_choices , inline=True),
+                title='Choose your option',
+                description='')     
+            Occupancy = colander.SchemaNode(
+                colander.String(),
+                missing=unicode(''),
+                widget=deform.widget.RadioChoiceWidget(values=occ_choices , inline=True),
+                title='Choose your option',
+                description='') 
+            Double_use = colander.SchemaNode(
+                colander.String(),
+                missing=unicode(''),
+                widget=deform.widget.RadioChoiceWidget(values=double_choices , inline=True),
+                title='Choose your option',
+                description='') 
+            Gender_double_use = colander.SchemaNode(
+                colander.String(),
+                missing=unicode(''),
+                widget=deform.widget.RadioChoiceWidget(values=gender_choices , inline=True),
+                title='Choose your gender',
+                description='') 
+        class Departure_information(colander.Schema):                  
+            Expected_departure_date = colander.SchemaNode(
+                colander.Date(),
+                description='')
+                
+            Expected_departure_time = colander.SchemaNode(
+                colander.Time(),
+                description='') 
+                
+            Departure_BUS_option = colander.SchemaNode(
+                colander.String(),
+                validator=colander.OneOf([x[0] for x in departure_choices]),
+                widget=deform.widget.RadioChoiceWidget(values=departure_choices , inline=True),
+                title='Choose your option',
+                description='')  
+         
+            BUS_option_departure = colander.SchemaNode(
+                colander.String(),
+                missing=unicode(''),
+                widget=deform.widget.RadioChoiceWidget(values=bus_stop_departure , inline=True),
+                title='Choose your option',
+                description=''
+                ) 
+        def validator_bus_arrival(form, value):
+            if (value['Arrival_BUS_option'] in ['1'] and not (value['BUS_option_arrival_morning'] in [x[0] for x in bus_stop_morning] ) ):
+                exc = colander.Invalid(form, 'Must select one option')
+                exc['BUS_option_arrival_morning'] = 'Must select one option '
+                raise exc
+            if (value['Arrival_BUS_option'] in ['2'] and not value['BUS_option_arrival_afternoon'] in [x[0] for x in bus_stop_afternoon] ):
+                exc = colander.Invalid(form, 'Must select one option')
+                exc['BUS_option_arrival_afternoon'] = 'Must select one option '
+                raise exc
+        def validator_bus_departure(form, value):
+            if (value['Departure_BUS_option'] in ['1'] and not ( value['BUS_option_departure'] in [x[0] for x in  bus_stop_departure] ) ):
+                exc = colander.Invalid(form, 'Must select one option')
+                exc['BUS_option_departure'] = 'Must select one option '
+                raise exc
+        def validator_hotel_stay(form, value):
+            if (value['Hotel'] in ['0']):
+                if not ( value['Occupancy'] in [x[0] for x in occ_choices] ):
+                    exc = colander.Invalid(form, 'Must select one option')
+                    exc['Occupancy'] = 'Must select one option '
+                    raise exc
+                elif (value['Occupancy'] in ['1']):
+                    if not ( value['Double_use'] in [x[0] for x in double_choices]):
+                        exc = colander.Invalid(form, 'Must select one option')
+                        exc['Double_use'] = 'Must select one option '
+                        raise exc
+                    elif (value['Double_use'] in ['1']):
+                        if not ( value['Gender_double_use'] in [x[0] for x in gender_choices] ):
+                            exc = colander.Invalid(form, 'Must select one option')
+                            exc['Gender_double_use'] = 'Must select one option '
+                            raise exc                   
+        
+        
+                #validator=colander.OneOf([x[0] for x in bus_stop]), 
+        def succeed():
+            return Response('<div id="thanks">Thanks!</div>')
         class Schema(colander.Schema):
-            number = colander.SchemaNode(
-                colander.Integer())
-            mapping = Mapping()
+            
+            personal_information = Personal_information()
+            hotel_information = Hotel_information(validator=validator_hotel_stay)
+            arrival_information = Arrival_information(validator=validator_bus_arrival)
+            departure_information = Departure_information(validator=validator_bus_departure)
 
         schema = Schema()
         
-        form = deform.Form(schema, buttons=('submit',) , renderer=renderer )
-        when = datetime.time(14, 35)
-        return render_to_response('templates/prova.pt',  render_form(request, form ,appstruct={'date':when} ) , request )
+        form = deform.Form(schema, buttons=('submit',) , renderer=renderer   )
+        when_date_arr = datetime.date(2013, 9, 29)
+        when_time_arr = datetime.time(14, 35)
+        when_date_dep = datetime.date(2013, 10, 4)
+        when_time_dep = datetime.time(14, 35)        
+        return render_to_response('templates/prova.pt',  render_form(request, form ,
+                                                                     appstruct={'arrival_information': {'Expected_Arrival_date' :when_date_arr, 'Expected_arrival_time':when_time_arr }, 
+                                                                                'departure_information' : {'Expected_departure_date' :when_date_dep, 'Expected_departure_time':when_time_dep } }
+                                                                                , success=succeed ) , request )
        
 def render_form(request, form, appstruct=colander.null, submitted='submit',
                     success=None, readonly=False):
-
+                      
         captured = None
 
         if submitted in request.POST:
             # the request represents a form submission
             try:
                 # try to validate the submitted values
+                
                 controls = request.POST.items()
                 captured = form.validate(controls)
+                
                 if success:
+                    try:
+                        # call validate
+                        user = model.User(name = captured['personal_information']['name'],
+                                          surname = captured['personal_information']['Surname'],
+                                          email = captured['personal_information']['email'],
+                                          institution = captured['personal_information']['Institution'], 
+                                          arrival_datetime = datetime.datetime.combine(captured['arrival_information']['Expected_Arrival_date'],
+                                                                    captured['arrival_information']['Expected_arrival_time']),
+                                          arrival_busoption = captured['arrival_information']['Arrival_BUS_option'],
+                                          arrival_bus_morning =  captured['arrival_information']['BUS_option_arrival_morning'], 
+                                          departure_datetime = datetime.datetime.combine(captured['departure_information']['Expected_departure_date'],
+                                                                    captured['departure_information']['Expected_departure_time']),
+                                          departure_busoption = captured['departure_information']['Departure_BUS_option'],
+                                          departure_bus = captured['departure_information']['BUS_option_departure'],  
+                                          vegeterian = captured['hotel_information']['Vegetarian'],
+                                          student = captured['hotel_information']['Student'],
+                                          hotel = captured['hotel_information']['Hotel'], 
+                                          Occupancy = captured['hotel_information']['Occupancy'],
+                                          Double_use = captured['hotel_information']['Double_use'],
+                                          Gender_double_use = captured['hotel_information']['Gender_double_use'])                      
+                        model.session.add(user)
+                        model.session.commit()
+                        id_reg = user.id
+                    except sqlalchemy.exc.IntegrityError, exc:
+                        reason = exc.message
+                        if reason.endswith('is not unique'):
+                            
+                            err_msg = "%s already exists" % exc.params[0]
+                            model.session.rollback()
+                            return {'form' : err_msg}
+                            
                     response = success()
                     if response is not None:
-                        return response
+                        import mailer
+                        #mailer.send_email("smtp.gmail.com",587,"davidepi79@gmail.com","IrisDavi","davide79_i@hotmail.com","contenuto","titolo")
+                        return {'form' : 'Thanks your registration number is '+str(id_reg) }
                 html = form.render(captured)
             except deform.ValidationFailure as e:
                 # the submitted values could not be validated
@@ -188,6 +329,7 @@ def render_form(request, form, appstruct=colander.null, submitted='submit',
 
         else:
             # the request requires a simple form rendering
+            
             html = form.render(appstruct, readonly=readonly)
 
         if request.is_xhr:
