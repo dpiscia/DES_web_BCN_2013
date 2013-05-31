@@ -146,7 +146,7 @@ html,body
 <footer class="footer" style="background-color:#c2c2c2;">
     <div class="container" style="margin:0 auto;" >
         <a class="brand"  > <img src="static/logo_ieec_40.png" ></a>
-        <a class="brand"  style="padding-left: 120px;"> <img src="static/csic_ice_logo_transp.png" ></a>
+        <a class="brand"  style="padding-left: 120px;"> <img src="static/csic_ice_logo_transp_w.png" ></a>
         <a class="brand pull-right" > <img src="static/logo_ifae_40.png"></a>
     </div>
 </footer>

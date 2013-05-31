@@ -13,7 +13,7 @@ from deform import ZPTRendererFactory
 from pkg_resources import resource_filename
 from colander import Range
 import datetime
-from pyramid_mailer import get_mailer
+
 import sqlalchemy
 
 @view_config(route_name='home', renderer='home.mako')
@@ -283,8 +283,10 @@ def render_form(request, form, appstruct=colander.null, submitted='submit',
                 # try to validate the submitted values
                 
                 controls = request.POST.items()
+                
                 captured = form.validate(controls)
                 
+                print captured
                 if success:
                     try:
                         # call validate

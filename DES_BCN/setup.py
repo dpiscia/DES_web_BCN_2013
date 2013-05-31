@@ -19,7 +19,7 @@ requires = [
     'colander',
     'deform',
     'colanderalchemy',
-    'pyramid_mailer',
+    'WebTest',
 	]
 
 setup(name='DES_BCN',
@@ -39,7 +39,7 @@ setup(name='DES_BCN',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
-      test_suite='des_bcn',
+      test_suite='des_bcn.test',
       install_requires=requires,
       entry_points="""\
       [paste.app_factory]
