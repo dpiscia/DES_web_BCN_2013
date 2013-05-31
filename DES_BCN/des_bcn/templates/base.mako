@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>DES BCN meeting</title>
+    <title>DES Barcelona 2013</title>
    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -152,7 +152,7 @@ html,body
              
             
               <a class="brand"  > <img src="static/logo_ieec_40.png" ></a>
-              <a class="brand"  style="padding-left: 120px;"> <img src="static/csic_ice_logo_transp.png" ></a>
+              <a class="brand"  style="padding-left: 180px;"> <img src="static/csic_ice_logo_transp_w.png" ></a>
               <a class="brand pull-right" > <img src="static/logo_ifae_40.png"></a>
              
           

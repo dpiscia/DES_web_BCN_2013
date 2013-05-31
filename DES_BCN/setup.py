@@ -23,7 +23,7 @@ requires = [
 	]
 
 setup(name='DES_BCN',
-      version='0.1',
+      version='0.0',
       description='DES_BCN',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[

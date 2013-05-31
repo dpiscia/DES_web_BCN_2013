@@ -10,7 +10,7 @@
 <p align="center" class="style1">The price of the room including full board (breakfast, lunch and dinner) is 91€ + 10%VAT per night per person for single occupancy and 73€ + 10% VAT per night per person for double occupancy </p>
 <p align="center" class="style2">Please<strong> DO NOT</strong> book your room on your own. </p> <span class="style1">
 <p align="center" class="style1">
-Rooms are booked and assigned throughout the <a href="${request.route_url('registration')}"> registration </a> </span>. Accommodation is to be paid directly at the Hotel at check-out.</p>
+Rooms are booked and assigned throughout the <a href="${request.route_url('registration')}"> registration</a> </span>. Accommodation is to be paid directly at the Hotel at check-out.</p>
 </p>
 <p class="style1">&nbsp;</p>
 <p align="center" class="style1">

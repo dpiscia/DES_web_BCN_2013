@@ -21,14 +21,14 @@
     <td class="style9">Airport T1 (Barcelona)</td>
     <td class="style9">Barcelona Downtown <br> (exact location TBD)</td>
     <td class="style9">Eden Roc (St.Feliu de Guixols)</td>
-    <td class="style9">Sunday 29 at 11.00 am (GMT+2)</td>
+    <td class="style9">Sunday 29 at 11.00 (GMT+2)</td>
     <td class="style9">2h (30 min to Barcelona)</td>
   </tr>
   <tr>
     <td class="style9">Airport T1 (Barcelona)</td>
     <td class="style9">Barcelona Downtown <br> (exact location TBD)</td>
     <td class="style9">Eden Roc (St.Feliu de Guixols)</td>
-    <td class="style9">Sunday 29 at 16.30 am (GMT+2)</td>
+    <td class="style9">Sunday 29 at 16.30 (GMT+2)</td>
     <td class="style9">2h (30 min to Barcelona)</td>
   </tr>
 </table>
@@ -46,7 +46,7 @@
     <td class="style9">Eden Roc (St.Feliu de Guixols)</td>
     <td class="style9">Airport T1 (Barcelona)</td>
     <td class="style9">Barcelona Downtown <br> (exact location TBD)</td>
-    <td class="style9">Sunday 29 at 11.00 am (GMT+2)</td>
+    <td class="style9">Friday 4 at 15:30 (GMT+2)</td>
     <td class="style9">2h (1:30 to Airport T1) </td>
   </tr>
 </table>
@@ -56,8 +56,9 @@
 
 <p class="style1">&nbsp;</p>
 <p class="style2">B) Public Bus</p>
-<p class="style1">Sarfa company has buses that travel both from “El Prat” Airport Terminal 2 (17,25€) (<span class="style10">be aware that most flights arrive to terminal 1 but you can take a shuttle from T1 to T2 for free</span>)  or <a href="http://www.barcelonanord.com/default_eng.asp" target="_blank">Estació del Nord </a> in Barcelona (15,30 €))</p>
-<p class="style1">You can buy online tickets <a href="http://www.grupsarbus.com/paginas/resultados_trayectos.php" target="_blank">here</a></p>
+<p class="style1">Sarfa company has buses that travel both from “El Prat” Airport Terminal 2 (17,25€) (<span class="style10">be aware that most flights arrive to terminal 1 but you can take a shuttle from T1 to T2 for free</span>)  or <a href="http://www.barcelonanord.com/default_eng.asp" target="_blank">Estació del Nord</a> in Barcelona (15,30 €))</p>
+<p class="style1">There are 2 buses a day leaving from Airport T2 (11:40 and 19:55) and 7 buses leaving from Estació del Nord in Barcelona (8:15, 10:15, 12:15, 14:15, 17:00, 19:00 and 20:30)</p>
+<p class="style1">You can buy online tickets <a href="http://www.grupsarbus.com/paginas/interurbano_buscador.php?id_idioma=3" target="_blank">here</a></p>
 <p class="style1">&nbsp;</p>
 <p class="style2">C) Rent a car </p>
 <p class="style1">There are a several places in the Airport to rent a car. Take into account that free parking in St. Feliu de Guixols is possible but might not be easy. The hotel offers parking for a fee.</p>
