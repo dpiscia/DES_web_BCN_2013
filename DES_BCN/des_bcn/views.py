@@ -13,6 +13,7 @@ from deform import ZPTRendererFactory
 from pkg_resources import resource_filename
 from colander import Range
 import datetime
+import widget
 
 import sqlalchemy
 
@@ -138,6 +139,7 @@ def prova_view(request):
                 description='')
             Expected_arrival_time = colander.SchemaNode(
                 colander.Time(),
+                widget = widget.TimeInputWidget(),
                 description='')     
             Arrival_BUS_option = colander.SchemaNode(
                 colander.String(),
@@ -202,6 +204,7 @@ def prova_view(request):
                 
             Expected_departure_time = colander.SchemaNode(
                 colander.Time(),
+                widget = widget.TimeInputWidget(),
                 description='') 
                 
             Departure_BUS_option = colander.SchemaNode(
@@ -251,8 +254,8 @@ def prova_view(request):
         
         
                 #validator=colander.OneOf([x[0] for x in bus_stop]), 
-        def succeed():
-            return Response('<div id="thanks">Thanks!</div>')
+        def succeed(id_reg=None):
+            return Response('<div id="thanks"><h3>Thanks! You have  </h3></div>')
         class Schema(colander.Schema):
             
             personal_information = Personal_information()
@@ -264,7 +267,7 @@ def prova_view(request):
         
         form = deform.Form(schema, buttons=('submit',) , renderer=renderer   )
         when_date_arr = datetime.date(2013, 9, 29)
-        when_time_arr = datetime.time(14, 35)
+        when_time_arr = datetime.time(10, 35)
         when_date_dep = datetime.date(2013, 10, 4)
         when_time_dep = datetime.time(14, 35)        
         return render_to_response('templates/prova.pt',  render_form(request, form ,
@@ -323,7 +326,7 @@ def render_form(request, form, appstruct=colander.null, submitted='submit',
                     if response is not None:
                         import mailer
                         #mailer.send_email("smtp.gmail.com",587,"davidepi79@gmail.com","IrisDavi","davide79_i@hotmail.com","contenuto","titolo")
-                        return {'form' : 'Thanks your registration number is '+str(id_reg) }
+                        return {'form' : '<h3> Thanks your registration number is '+str(id_reg)+' </h3>' }
                 html = form.render(captured)
             except deform.ValidationFailure as e:
                 # the submitted values could not be validated
