@@ -46,7 +46,8 @@ class TimeInputWidget(Widget):
     readonly_template = 'readonly/textinput'
     size = None
     style = None
-    requirements = ( ('jqueryui', None), ('timepicker', None), )
+    requirements = (())
+    default_resources = ( ('jqueryui', None), ('timepicker', None), )
     default_options = (
                        ('timeFormat', 'hh:mm   '),
                         ('separator', ':'), ('showMeridian', 'false') )
@@ -64,7 +65,7 @@ class TimeInputWidget(Widget):
         kw['options'] = json.dumps(options)
         separator = options.get('separator', ' ')
         
-        import datetime
+        
         
         cstruct = separator.join(cstruct.split('T'))
         

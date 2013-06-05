@@ -107,8 +107,8 @@ def prova_view(request):
         arrival_choices = (("0", 'On my own'), ("1", 'BUS Morning'),
                    ("2", 'BUS Afternoon'))
         departure_choices = (("0", 'On my own'), ("1", 'BUS Afternoon'))                   
-        bus_stop_morning =       (("0", 'From Airport'), ("1", 'From City')) 
-        bus_stop_afternoon =       (("0", 'From Airport'), ("1", 'From City'))
+        bus_stop_morning =       (("0", 'From Airport (11:00) '), ("1", 'From City (11:30)')) 
+        bus_stop_afternoon =       (("0", 'From Airport (16:30)'), ("1", 'From City (17:00)'))
         bus_stop_departure =       (("0", 'To Airport'), ("1", 'To City'))
         hotel_choices =       (("0", 'Eden'), ("1", 'On my own'))
         occ_choices =       (("0", 'Single'), ("1", 'Double'))
