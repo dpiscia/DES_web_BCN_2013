@@ -110,9 +110,9 @@ def prova_view(request):
         bus_stop_morning =       (("0", 'From Airport (11:00) '), ("1", 'From City (11:30)')) 
         bus_stop_afternoon =       (("0", 'From Airport (16:30)'), ("1", 'From City (17:00)'))
         bus_stop_departure =       (("0", 'To Airport'), ("1", 'To City'))
-        hotel_choices =       (("0", 'Eden'), ("1", 'On my own'))
+        hotel_choices =       (("0", 'Eden Roc'), ("1", 'On my own'))
         occ_choices =       (("0", 'Single'), ("1", 'Double'))
-        double_choices =       (("0", 'Accompanying person'), ("1", 'other DES'))
+        double_choices =       (("0", 'Accompanying person'), ("1", 'other DES participant'))
         gender_choices =       (("0", 'Male'), ("1", 'Female'))
 
                 
@@ -131,7 +131,18 @@ def prova_view(request):
                 widget=widget_email)
             Institution = colander.SchemaNode(
                 colander.String(),
-                description='')                
+                description='')    
+            Student = colander.SchemaNode(
+                colander.Boolean(),
+                description='',
+                widget=deform.widget.CheckboxWidget(),
+                title='Student')   
+            Vegetarian = colander.SchemaNode(
+                colander.Boolean(),
+                description='',
+                widget=deform.widget.CheckboxWidget(),
+                title='Vegetarian meals')
+         
         class Arrival_information(colander.Schema):         
             Expected_Arrival_date = colander.SchemaNode(
                 colander.Date(),
@@ -163,39 +174,29 @@ def prova_view(request):
                 description=''
                 )                 
         class Hotel_information(colander.Schema):                  
-            Vegetarian = colander.SchemaNode(
-                colander.Boolean(),
-                description='',
-                widget=deform.widget.CheckboxWidget(),
-                title='Vegetarian meals')
-            Student = colander.SchemaNode(
-                colander.Boolean(),
-                description='',
-                widget=deform.widget.CheckboxWidget(),
-                title='Are you a Student')
-            Hotel = colander.SchemaNode(
-                colander.String(),
-                validator=colander.OneOf([x[0] for x in hotel_choices]),
-                widget=deform.widget.RadioChoiceWidget(values=hotel_choices , inline=True),
-                title='Choose your option',
-                description='')     
+  
             Occupancy = colander.SchemaNode(
                 colander.String(),
                 missing=unicode(''),
                 widget=deform.widget.RadioChoiceWidget(values=occ_choices , inline=True),
-                title='Choose your option',
+                title='Room type',
                 description='') 
             Double_use = colander.SchemaNode(
                 colander.String(),
                 missing=unicode(''),
                 widget=deform.widget.RadioChoiceWidget(values=double_choices , inline=True),
-                title='Choose your option',
+                title='Sharing with',
                 description='') 
             Gender_double_use = colander.SchemaNode(
                 colander.String(),
                 missing=unicode(''),
                 widget=deform.widget.RadioChoiceWidget(values=gender_choices , inline=True),
-                title='Choose your gender',
+                title='Your gender',
+                description='') 
+            Proposed_name = colander.SchemaNode(
+                colander.String(),
+                missing=unicode(''),
+                title='To share with (optional)',
                 description='') 
         class Departure_information(colander.Schema):                  
             Expected_departure_date = colander.SchemaNode(
@@ -236,12 +237,8 @@ def prova_view(request):
                 exc['BUS_option_departure'] = 'Must select one option '
                 raise exc
         def validator_hotel_stay(form, value):
-            if (value['Hotel'] in ['0']):
-                if not ( value['Occupancy'] in [x[0] for x in occ_choices] ):
-                    exc = colander.Invalid(form, 'Must select one option')
-                    exc['Occupancy'] = 'Must select one option '
-                    raise exc
-                elif (value['Occupancy'] in ['1']):
+   
+                if (value['Occupancy'] in ['1']):
                     if not ( value['Double_use'] in [x[0] for x in double_choices]):
                         exc = colander.Invalid(form, 'Must select one option')
                         exc['Double_use'] = 'Must select one option '
@@ -305,12 +302,13 @@ def render_form(request, form, appstruct=colander.null, submitted='submit',
                                                                     captured['departure_information']['Expected_departure_time']),
                                           departure_busoption = captured['departure_information']['Departure_BUS_option'],
                                           departure_bus = captured['departure_information']['BUS_option_departure'],  
-                                          vegeterian = captured['hotel_information']['Vegetarian'],
-                                          student = captured['hotel_information']['Student'],
-                                          hotel = captured['hotel_information']['Hotel'], 
+                                          vegeterian = captured['personal_information']['Vegetarian'],
+                                          student = captured['personal_information']['Student'],
+                                          hotel = 1, 
                                           Occupancy = captured['hotel_information']['Occupancy'],
                                           Double_use = captured['hotel_information']['Double_use'],
-                                          Gender_double_use = captured['hotel_information']['Gender_double_use'])                      
+                                          Gender_double_use = captured['hotel_information']['Gender_double_use'],
+                                          Proposed_name = captured['hotel_information']['Proposed_name'])                      
                         model.session.add(user)
                         model.session.commit()
                         id_reg = user.id
@@ -321,12 +319,24 @@ def render_form(request, form, appstruct=colander.null, submitted='submit',
                             err_msg = "%s already exists" % exc.params[0]
                             model.session.rollback()
                             return {'form' : err_msg}
+                          
                             
+                    except sqlalchemy.exc.SQLAlchemyError:
+                            err_msg = "DB connection problems, plase try again or contact with administrator"
+                            model.session.rollback()
+                            return {'form' : err_msg}
+                          
                     response = success()
                     if response is not None:
                         import mailer
-                        #mailer.send_email("smtp.gmail.com",587,"davidepi79@gmail.com","IrisDavi","davide79_i@hotmail.com","contenuto","titolo")
-                        return {'form' : '<h3> Thanks your registration number is '+str(id_reg)+' </h3>' }
+         
+                        mailer.send_email("smtp.gmail.com",587,"DESBarcelona2013@gmail.com","20DESBCN13",captured['personal_information']['email'], form , "ID registration "+str(id_reg))
+                        
+                        if captured['personal_information']['Student'] == True:
+                            msg = '<h3> Thanks! your registration number is '+str(id_reg)+'  <br>  As you registered as student you do not have to pay the registration fee </h3>'
+                        else :
+                            msg = '<h3> Thanks! your registration number is '+str(id_reg)+' <br> Please take note of this registration ID beacuse it is required for the payment process</h3> <br> <a href"#" class="btn-primary"> Proceed to payment</a>'
+                        return {'form' : msg }
                 html = form.render(captured)
             except deform.ValidationFailure as e:
                 # the submitted values could not be validated

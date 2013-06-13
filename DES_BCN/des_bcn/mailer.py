@@ -10,7 +10,9 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-def send_email(mailhost,port,username,pwd,toaddrs,content, subject):
+
+
+def send_email(mailhost,port,username,pwd,toaddrs,form, subject):
 #port = 587
 #mailhost = "smtp.gmail.com"
     smtp = smtplib.SMTP(mailhost, port)
@@ -21,7 +23,13 @@ def send_email(mailhost,port,username,pwd,toaddrs,content, subject):
     smtp.login(username,pwd)
     msg = MIMEMultipart()
     msg['Subject'] = subject
-    part1 = MIMEText(content, 'plain')
+
+    text = "Dear DES participant \n You have registred for the DES Barcelona 2013 meeting \n Thanks and Best regards \n  \n \n \n"
+    html = form.render(readonly=True)
+            
+    part1 = MIMEText(text, 'plain')
+    part2 = MIMEText(html, 'html')
     msg.attach(part1)
+    msg.attach(part2)
     smtp.sendmail(username,toaddrs, msg.as_string())
  

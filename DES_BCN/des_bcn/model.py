@@ -70,9 +70,11 @@ class User(Base):
     Occupancy =  Column(Integer, nullable=True)
     Double_use =  Column(Integer, nullable=True)
     Gender_double_use =  Column(Integer, nullable=True)
+    Proposed_name =  Column(String(64), nullable=True)
     departure_datetime = Column(DateTime,  nullable=False)
     departure_busoption = Column(Integer,  nullable=False)   
     departure_bus = Column(Integer, nullable=True)
+    paid = Column(Boolean, nullable=True)
 #    def __init__(self, name, surname,  email, institution, arrival_datetime, arrival_busoption ,departure_datetime, hotel,  departure_busoption,
 #                  arrival_bus_morning= None, arrival_bus_afternoon= None,  
 #                  vegeterian= False, student= None, Occupancy = None,  Double_use= False, 

@@ -16,20 +16,23 @@ $(document).ready(function(){
      $("#deform").live('change', function() 
         {        appear_cf("17","16", ["1"]);
                  appear_cf("18","16", ["2"]);
-                 appear_cf("10","9", ["0"]);
+                 appear_cf("10","9", ["1"]);
                  appear_cf("11","10", ["1"]);
-                 appear_cf("12","11", ["1"]);
+                 appear_cf("12","10", ["1"]);
+      
                  appear_cf("23","22", ["1"]);
              
 
         });    
         
-                 appear_cf("17","16", ["1"]);
+  appear_cf("17","16", ["1"]);
                  appear_cf("18","16", ["2"]);
-                 appear_cf("10","9", ["0"]);
+                 appear_cf("10","9", ["1"]);
                  appear_cf("11","10", ["1"]);
-                 appear_cf("12","11", ["1"]);
+                 appear_cf("12","10", ["1"]);
+      
                  appear_cf("23","22", ["1"]);
+             
 
  
 });
