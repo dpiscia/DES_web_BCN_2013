@@ -256,7 +256,7 @@ def prova_view(request):
         class Schema(colander.Schema):
             
             personal_information = Personal_information()
-            hotel_information = Hotel_information(validator=validator_hotel_stay)
+            hotel_information = Hotel_information( title = "Eden Rock Hotel Information", validator=validator_hotel_stay)
             arrival_information = Arrival_information(validator=validator_bus_arrival)
             departure_information = Departure_information(validator=validator_bus_departure)
 
