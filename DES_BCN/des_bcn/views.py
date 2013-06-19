@@ -14,7 +14,7 @@ from pkg_resources import resource_filename
 from colander import Range
 import datetime
 import widget
-
+from sqlalchemy import  or_
 import sqlalchemy
 
 @view_config(route_name='home', renderer='home.mako')
@@ -32,9 +32,9 @@ def program_view(request):
 @view_config(route_name='participants', renderer='participants.mako')
 def participants_view(request):
 
-#    participants = model.session.query(model.User).all()
-#    model.session.commit()
-    participants = []
+    participants = model.session.query(model.User).filter(or_(model.User.student == True,model.User.paid == True)).all()
+    model.session.commit()
+
     return {'participants':participants ,
             'tab' : 'participants'}
     
@@ -177,7 +177,6 @@ def prova_view(request):
   
             Occupancy = colander.SchemaNode(
                 colander.String(),
-                missing=unicode(''),
                 widget=deform.widget.RadioChoiceWidget(values=occ_choices , inline=True),
                 title='Room type',
                 description='') 
@@ -335,7 +334,7 @@ def render_form(request, form, appstruct=colander.null, submitted='submit',
                         if captured['personal_information']['Student'] == True:
                             msg = '<h3> Thanks! your registration number is '+str(id_reg)+'  <br>  As you registered as student you do not have to pay the registration fee </h3>'
                         else :
-                            msg = '<h3> Thanks! your registration number is '+str(id_reg)+' <br> Please take note of this registration ID beacuse it is required for the payment process</h3> <br> <a href"#" class="btn-primary"> Proceed to payment</a>'
+                            msg = '<h3> Thanks! your registration number is '+str(id_reg)+' <br> Please take note of this registration ID because it is required for the payment process</h3> <br> <a href= "https://tp.ifae.es/cgi-bin/des.cgi" button class="btn-large btn-primary"> Proceed to payment</a>'
                         return {'form' : msg }
                 html = form.render(captured)
             except deform.ValidationFailure as e:

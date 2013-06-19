@@ -24,7 +24,7 @@ def send_email(mailhost,port,username,pwd,toaddrs,form, subject):
     msg = MIMEMultipart()
     msg['Subject'] = subject
 
-    text = "Dear DES participant \n You have registered for the DES Barcelona 2013 meeting \n Thanks and Best regards \n  \n \n \n"
+    text = "Dear DES participant \nYou have registered for the DES Barcelona 2013 meeting!   \n The registration will be confirmed once we received (students are excenpted) the payment confirmation from the bank.\n  \n  \n \n \n"
     html = form.render(readonly=True)
             
     part1 = MIMEText(text, 'plain')

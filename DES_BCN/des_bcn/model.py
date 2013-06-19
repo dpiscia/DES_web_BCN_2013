@@ -74,7 +74,7 @@ class User(Base):
     departure_datetime = Column(DateTime,  nullable=False)
     departure_busoption = Column(Integer,  nullable=False)   
     departure_bus = Column(Integer, nullable=True)
-    paid = Column(Boolean, nullable=True)
+    paid = Column(Boolean, nullable=True, default = False)
 #    def __init__(self, name, surname,  email, institution, arrival_datetime, arrival_busoption ,departure_datetime, hotel,  departure_busoption,
 #                  arrival_bus_morning= None, arrival_bus_afternoon= None,  
 #                  vegeterian= False, student= None, Occupancy = None,  Double_use= False, 
