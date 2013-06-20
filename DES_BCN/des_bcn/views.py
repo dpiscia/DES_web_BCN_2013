@@ -329,7 +329,7 @@ def render_form(request, form, appstruct=colander.null, submitted='submit',
                     if response is not None:
                         import mailer
          
-                        mailer.send_email("smtp.gmail.com",587,"DESBarcelona2013@gmail.com","20DESBCN13",captured['personal_information']['email'], form , "DES-BCN ID registration "+str(id_reg))
+                        mailer.send_email("smtp.gmail.com",587,"DESBarcelona2013@gmail.com","XXXXXXX",captured['personal_information']['email'], form , "DES-BCN ID registration "+str(id_reg))
                         
                         if captured['personal_information']['Student'] == True:
                             msg = '<h3> Thanks! your registration number is '+str(id_reg)+'  <br>  As you registered as student you do not have to pay the registration fee </h3>'
